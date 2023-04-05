@@ -1,0 +1,11 @@
+.idea/
+.gradle/
+classes/
+*.iml
+build/
+license.iml
+*.MF
+MANIFEST.MF
+/out/
+.env*
+HELP.md
