@@ -28,6 +28,13 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // DB
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    runtimeOnly("mysql:mysql-connector-java:8.0.32")
+    // dotenv
+    implementation("io.github.cdimascio:dotenv-java:2.3.1")
+    // jasypt
+    implementation("com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5")
 }
 
 tasks.withType<KotlinCompile> {
