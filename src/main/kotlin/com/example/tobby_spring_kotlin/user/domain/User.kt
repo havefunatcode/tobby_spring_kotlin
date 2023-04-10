@@ -1,4 +1,4 @@
-package com.example.tobby_spring_kotlin.domain
+package com.example.tobby_spring_kotlin.user.domain
 
 data class User(
     val id: String,
