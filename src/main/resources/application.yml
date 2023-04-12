@@ -4,7 +4,7 @@ spring:
       maximum-pool-size: 1
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ENC(E0k89ZUS6qcaY5ZgOxyLtw==)
-    password: ENC(HYcG7V978/EY7tGVXUa4Z1wqpXZqhA2v)
+    password: ENC(GWJAv3/1NfpcOGPGvGDOC9/St+n7TVn0)
     url: jdbc:mysql://localhost:3309?useSSL=false&serverTimezone=Asia/Seoul&autoReconnection=true&useUnicodze=true&characterEncoding=utf8&allowMultiQueries=true
 
 jasypt:
