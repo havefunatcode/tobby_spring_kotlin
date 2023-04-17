@@ -5,10 +5,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ENC(E0k89ZUS6qcaY5ZgOxyLtw==)
     password: ENC(GWJAv3/1NfpcOGPGvGDOC9/St+n7TVn0)
-    url: jdbc:mysql://localhost:3309?useSSL=false&serverTimezone=Asia/Seoul&autoReconnection=true&useUnicodze=true&characterEncoding=utf8&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3309/tobby_spring?useSSL=false&serverTimezone=Asia/Seoul&autoReconnection=true&useUnicodze=true&characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true
 
 jasypt:
   encryptor:
     password: ${CRYPTO_KEY}
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    property:
+      prefix: ENC(
+      suffix: )

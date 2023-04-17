@@ -2,26 +2,21 @@ package com.example.tobby_spring_kotlin.user.dao
 
 import com.example.tobby_spring_kotlin.user.domain.User
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import java.sql.SQLException
 
 @SpringBootTest
+@ContextConfiguration(classes = [TestConfig::class])
 class UserNoArgTest {
 
-    @Value("\${spring.datasource.url}")
-    private lateinit var dbUrl: String
-    @Value("\${spring.datasource.driver-class-name}")
-    private lateinit var driverUrl: String
-    @Value("\${spring.datasource.username}")
-    private lateinit var id: String
-    @Value("\${spring.datasource.password}")
-    private lateinit var password: String
+    @Autowired
+    private lateinit var userDao: UserDao
 
     @Test
     fun daoTest() {
         try {
-            val userDao = UserDao(dbUrl, driverUrl, id, password)
             val user = User("whiteship", "백기선", "married")
 
             userDao.add(user)
