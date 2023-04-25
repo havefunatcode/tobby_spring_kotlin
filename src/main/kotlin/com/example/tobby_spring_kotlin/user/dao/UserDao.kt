@@ -8,12 +8,12 @@ import java.sql.SQLException
 @NoArg
 @Component
 class UserDao(
-    private val simpleConnectionMaker: SimpleConnectionMaker
+    private val connectionMaker: DConnectionMaker
 ) {
 
     @Throws(ClassNotFoundException::class, SQLException::class)
     fun add(user: User) {
-        val connection = simpleConnectionMaker.getConnection()
+        val connection = connectionMaker.makeConnection()
         val preparedStatement = connection.prepareStatement("insert into user(id, name, password) value(?,?,?)")
         preparedStatement.setString(1, user.id)
         preparedStatement.setString(2, user.name)
@@ -27,7 +27,7 @@ class UserDao(
 
     @Throws(ClassNotFoundException::class, SQLException::class)
     fun get(id: String): User? {
-        val connection = simpleConnectionMaker.getConnection()
+        val connection = connectionMaker.makeConnection()
         val preparedStatement = connection.prepareStatement("select * from tobby_spring.USER where id = ?")
         preparedStatement.setString(1, id)
 

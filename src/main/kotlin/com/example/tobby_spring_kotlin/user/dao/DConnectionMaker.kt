@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.sql.Connection
 import java.sql.DriverManager
-import java.sql.SQLException
 
 @Component
-class SimpleConnectionMaker(
+class DConnectionMaker(
     @Value("\${spring.datasource.url}")
     private val dbUrl: String,
     @Value("\${spring.datasource.driver-class-name}")
@@ -16,10 +15,11 @@ class SimpleConnectionMaker(
     private val username: String,
     @Value("\${spring.datasource.password}")
     private val password: String
-) {
-    @Throws(ClassNotFoundException::class, SQLException::class)
-    fun getConnection(): Connection {
+): ConnectionMaker {
+
+    override fun makeConnection(): Connection {
         Class.forName(driverUrl)
         return DriverManager.getConnection(dbUrl, username, password)
     }
+
 }
