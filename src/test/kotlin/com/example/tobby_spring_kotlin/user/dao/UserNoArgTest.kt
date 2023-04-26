@@ -1,22 +1,30 @@
 package com.example.tobby_spring_kotlin.user.dao
 
 import com.example.tobby_spring_kotlin.user.domain.User
+import jakarta.xml.bind.PropertyException
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.core.env.Environment
 import org.springframework.test.context.ContextConfiguration
 import java.sql.SQLException
 
 @SpringBootTest
 @ContextConfiguration(classes = [TestConfig::class])
 class UserNoArgTest {
-
     @Autowired
-    private lateinit var userDao: UserDao
+    private lateinit var env: Environment
 
     @Test
     @Throws(ClassNotFoundException::class, SQLException::class)
     fun daoTest() {
+        val dbUrl = env.getProperty("spring.datasource.url") ?: throw PropertyException("There's no property in Context!")
+        val driverUrl = env.getProperty("spring.datasource.driver-class-name") ?: throw PropertyException("There's no property in Context!")
+        val username = env.getProperty("spring.datasource.username") ?: throw PropertyException("There's no property in Context!")
+        val password = env.getProperty("spring.datasource.password") ?: throw PropertyException("There's no property in Context!")
+        val connectionMaker = DConnectionMaker(dbUrl, driverUrl, username, password)
+        val userDao = UserDao(connectionMaker)
+
         val user = User("whiteship", "백기선", "married")
 
         userDao.add(user)
@@ -29,3 +37,5 @@ class UserNoArgTest {
         println("\${user2.id} 조회 성공")
     }
 }
+
+
