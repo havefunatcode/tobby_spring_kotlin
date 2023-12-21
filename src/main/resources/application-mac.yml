@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    username: ENC(wu1nLs+PQEtY64iNW1hiig==)
+    password: ENC(Kzv8fYfB1LQnJeI8bSzWT1rxS1yhvNTR)
+    url: jdbc:mysql://localhost:3306/tobby_spring?useSSL=false&serverTimezone=Asia/Seoul&autoReconnection=true&useUnicodze=true&characterEncoding=utf8&allowMultiQueries=true&allowPublicKeyRetrieval=true

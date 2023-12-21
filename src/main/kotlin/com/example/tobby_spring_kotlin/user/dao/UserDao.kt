@@ -24,7 +24,7 @@ class UserDao(
     }
 
     @Throws(ClassNotFoundException::class, SQLException::class)
-    fun get(id: String): User? {
+    fun get(id: String): User {
         val connection = connectionMaker.makeConnection()
         val preparedStatement = connection.prepareStatement("select * from tobby_spring.USER where id = ?")
         preparedStatement.setString(1, id)
