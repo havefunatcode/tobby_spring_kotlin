@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.core.env.Environment
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import java.sql.SQLException
 
 @SpringBootTest
 @ContextConfiguration(classes = [TestConfig::class])
+@ActiveProfiles("mac")
 class UserNoArgTest {
     @Autowired
     private lateinit var env: Environment
@@ -22,8 +24,7 @@ class UserNoArgTest {
         val driverUrl = env.getProperty("spring.datasource.driver-class-name") ?: throw PropertyException("There's no property in Context!")
         val username = env.getProperty("spring.datasource.username") ?: throw PropertyException("There's no property in Context!")
         val password = env.getProperty("spring.datasource.password") ?: throw PropertyException("There's no property in Context!")
-        val connectionMaker = DConnectionMaker(dbUrl, driverUrl, username, password)
-        val userDao = UserDao(connectionMaker)
+        val userDao = DaoFactory().userDao(dbUrl, driverUrl, username, password)
 
         val user = User("whiteship", "백기선", "married")
 
@@ -36,6 +37,7 @@ class UserNoArgTest {
         println(user2.name)
         println("\${user2.id} 조회 성공")
     }
+
 }
 
 
