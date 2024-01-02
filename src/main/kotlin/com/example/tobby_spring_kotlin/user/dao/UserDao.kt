@@ -9,6 +9,8 @@ class UserDao(
     private val connectionMaker: ConnectionMaker
 ) {
 
+    constructor(): this(DConnectionMaker())
+
     @Throws(ClassNotFoundException::class, SQLException::class)
     fun add(user: User) {
         val connection = connectionMaker.makeConnection()

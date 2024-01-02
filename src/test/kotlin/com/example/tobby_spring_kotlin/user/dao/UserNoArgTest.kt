@@ -5,6 +5,8 @@ import jakarta.xml.bind.PropertyException
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.ApplicationContext
+import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.env.Environment
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
@@ -20,11 +22,8 @@ class UserNoArgTest {
     @Test
     @Throws(ClassNotFoundException::class, SQLException::class)
     fun daoTest() {
-        val dbUrl = env.getProperty("spring.datasource.url") ?: throw PropertyException("There's no property in Context!")
-        val driverUrl = env.getProperty("spring.datasource.driver-class-name") ?: throw PropertyException("There's no property in Context!")
-        val username = env.getProperty("spring.datasource.username") ?: throw PropertyException("There's no property in Context!")
-        val password = env.getProperty("spring.datasource.password") ?: throw PropertyException("There's no property in Context!")
-        val userDao = DaoFactory().userDao(dbUrl, driverUrl, username, password)
+        val context: ApplicationContext = AnnotationConfigApplicationContext(DaoFactory::class.java)
+        val userDao: UserDao = context.getBean("userDao", UserDao::class.java)
 
         val user = User("whiteship", "백기선", "married")
 
