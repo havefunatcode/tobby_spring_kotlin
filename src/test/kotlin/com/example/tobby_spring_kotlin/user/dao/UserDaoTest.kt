@@ -4,8 +4,10 @@ import com.example.tobby_spring_kotlin.user.connection.*
 import com.example.tobby_spring_kotlin.user.domain.User
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.ApplicationContext
+import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.env.*
 import org.springframework.test.context.*
 
@@ -14,18 +16,12 @@ import org.springframework.test.context.*
 @ContextConfiguration(classes = [TestConfig::class])
 class UserDaoTest {
 
-    @Value("\${spring.datasource.driver-class-name}")
-    private lateinit var driverClassName: String
-    @Value("\${spring.datasource.url}")
-    private lateinit var dbUrl: String
-    @Value("\${spring.datasource.username}")
-    private lateinit var username: String
-    @Value("\${spring.datasource.password}")
-    private lateinit var password: String
+    @Autowired
+    private lateinit var context: ApplicationContext
 
     @Test
     fun 등록_조회_테스트() {
-        val userDao: UserDao = DaoFactory(driverClassName, dbUrl, username, password).userDao()
+        val userDao: UserDao = context.getBean("userDao", UserDao::class.java)
 
         val user = User("whiteship", "백기선", "married")
         userDao.add(user)
