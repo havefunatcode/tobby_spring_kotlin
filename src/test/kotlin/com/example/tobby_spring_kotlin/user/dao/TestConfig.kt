@@ -8,8 +8,10 @@ import org.springframework.test.context.TestPropertySource
 @TestPropertySource("classpath:application.yml")
 @TestConfiguration
 class TestConfig {
+
     @PostConstruct
     fun init() {
         Dotenv.configure().filename(".env.properties").systemProperties().load()
     }
+
 }

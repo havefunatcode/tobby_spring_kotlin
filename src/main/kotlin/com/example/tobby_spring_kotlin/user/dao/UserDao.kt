@@ -1,15 +1,13 @@
 package com.example.tobby_spring_kotlin.user.dao
 
-import com.example.tobby_spring_kotlin.annotation.NoArg
+import com.example.tobby_spring_kotlin.user.connection.*
 import com.example.tobby_spring_kotlin.user.domain.User
+import org.springframework.util.ObjectUtils
 import java.sql.SQLException
 
-@NoArg
 class UserDao(
     private val connectionMaker: ConnectionMaker
 ) {
-
-    constructor(): this(DConnectionMaker())
 
     @Throws(ClassNotFoundException::class, SQLException::class)
     fun add(user: User) {
