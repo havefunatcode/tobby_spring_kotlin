@@ -24,9 +24,8 @@ class UserDaoTest {
     private lateinit var password: String
 
     @Test
-    fun noArgTest() {
-        val connectionMaker: ConnectionMaker = DConnectionMaker(driverClassName, dbUrl, username, password)
-        val userDao: UserDao = UserDao(connectionMaker)
+    fun 등록_조회_테스트() {
+        val userDao: UserDao = DaoFactory(driverClassName, dbUrl, username, password).userDao()
 
         val user = User("whiteship", "백기선", "married")
         userDao.add(user)
