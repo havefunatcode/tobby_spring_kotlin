@@ -1,4 +1,4 @@
-package com.example.tobby_spring_kotlin.user.dao
+package com.example.tobby_spring_kotlin.config
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
